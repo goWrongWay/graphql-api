@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import graphqlHTTP from "express-graphql";
 
 import schema from "./graphql";
-
+var cors = require('cors')
 const app = express();
-
+app.use(cors())
 mongoose.connect(
   "mongodb://malin:malin1857@ds119059.mlab.com:19059/graphql-api"
 );

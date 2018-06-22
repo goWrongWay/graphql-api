@@ -1,4 +1,4 @@
-import { GraphQLID, GraphQLNonNull } from "graphql";
+import { GraphQLID, GraphQLString, GraphQLNonNull } from "graphql";
 
 import { userType } from "../../types/user";
 
@@ -7,12 +7,13 @@ import UserModel from "../../../models/user";
 export default {
   type: userType,
   args: {
-    id: {
-      name: "ID",
-      type: new GraphQLNonNull(GraphQLID)
+    name: {
+      name: "Name",
+      type: new GraphQLNonNull(GraphQLString)
     }
   },
   resolve(root, params) {
-    return UserModel.findById(params.id).exec();
+      return UserModel.findOne({name: params.name}).exec();
+      // return UserModel.findById(params.name).exec();
   }
 };
