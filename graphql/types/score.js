@@ -3,13 +3,13 @@ import  {
     GraphQLNonNull,
     GraphQLID,
     GraphQLString,
+    GraphQLFloat,
     GraphQLInputObjectType,
     GraphQLList
 } from 'graphql';
-import PostModel from "../../models/post";
 
-export const postType = new GraphQLObjectType({
-    name: 'Post',
+export const scoreType = new GraphQLObjectType({
+    name: 'Score',
     fields: () => ({
         _id: {
             type: new GraphQLNonNull(GraphQLID)
@@ -17,27 +17,42 @@ export const postType = new GraphQLObjectType({
         uid: {
             type: GraphQLString
         },
-        title: {
+        eid: {
             type: GraphQLString
         },
-        body: {
+        aid: {
+            type: GraphQLString
+        },
+        goal: {
+            type: GraphQLString,
+        },
+        time: {
             type: GraphQLString
         }
+
+
     })
 })
 
-export const postInputType = new GraphQLInputObjectType({
-    name: 'PostInput',
-    description: 'Insert Post',
+export const scoreInputType = new GraphQLInputObjectType({
+    name: 'ScoreInput',
+    description: 'Insert Score',
     fields: () => ({
         uid: {
             type: GraphQLString
         },
-        title: {
+        eid: {
             type: GraphQLString
         },
-        body: {
+        aid: {
+            type: GraphQLString
+        },
+        goal: {
+            type: GraphQLString,
+        },
+        time: {
             type: GraphQLString
         }
+
     })
 })

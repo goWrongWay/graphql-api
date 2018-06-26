@@ -28,6 +28,6 @@ app.use(
     pretty: true
   }))
 );
-app.listen(3000, () => {
-  console.log("graphql at port 3000");
+app.listen(3004, () => {
+  console.log("graphql at port 3004");
 });

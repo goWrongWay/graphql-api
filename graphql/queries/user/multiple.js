@@ -9,9 +9,9 @@ export default {
 
   resolve(root, params) {
     const users = UserModel.find().exec();
-    if (!users) {
+      if (!users) {
       throw new Error("Error while fetching users...");
     }
-    return users;
+      return users;
   }
 };

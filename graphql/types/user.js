@@ -7,7 +7,10 @@ import {
   GraphQLList
 } from "graphql";
 import PostModel from "../../models/post";
+import EventModel from "../../models/event";
 import { postType } from "./post";
+import { eventType } from "./event";
+
 
 export const userType = new GraphQLObjectType({
   name: "User",
@@ -41,6 +44,6 @@ export const userInputType = new GraphQLInputObjectType({
     },
     name: {
       type: GraphQLString
-    }
+    },
   })
 });
