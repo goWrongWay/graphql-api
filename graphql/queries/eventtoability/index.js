@@ -1,4 +1,6 @@
 import Eventtoability from "./multiple";
+import EventtoabilitySingle from "./single";
 export default {
-    Eventtoability
+    Eventtoability,
+    EventtoabilitySingle
 };
