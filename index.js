@@ -34,7 +34,6 @@ app.get("/user/score", (req, res) => {
             res.json({data: map, status: 200, error: 'error'})
         }
         let num = 0;
-
         let len = post.length;
         if (!len) {
             res.json({data: map, status: 200})
@@ -42,28 +41,19 @@ app.get("/user/score", (req, res) => {
         post.map(function ({aid, goal}) {
 
             AbilityModel.findById(aid, function(err, data) {
-                console.log(val[aid]);
                 num += 1;
-                console.log(aid);
                 if (data) {
                     let {type, _id} = data;
                     console.log(_id);
                     val[aid]['value'] += parseFloat(goal)
 
-                    // if (type in map) {
-                    //     map[type] += Number(goal);
-                    //     val[aid] += Number(goal)
-                    // } else {
-                    //     map[type] = Number(goal);
-                    // }
                 } else {
-                    res.json({data: val, status: 200})
+                    res.json({data: {}, status: 200})
                 }
                 if (len === num) {
                     for(var k in val) {
                         if (k !== 'name') {
                             arr.push(val[k])
-
                         }
                     }
                     res.json({data: arr, status: 200})

@@ -14,11 +14,13 @@ export default {
         }
     },
     resolve(root, params) {
+        console.log(params.data);
         const pModel = new ScoreModel(params.data);
         const newPost = pModel.save();
         if (!newPost) {
             throw new Error('Error adding score');
         }
+        console.log(2);
         return newPost
     }
 }
