@@ -3,9 +3,8 @@ import mongoose from "mongoose";
 import graphqlHTTP from "express-graphql";
 import ScoreModel from "./models/score";
 import AbilityModel from "./models/ability";
-import personAbility from './personAbility';
 import util from 'util'
-
+import fs from 'fs'
 import schema from "./graphql";
 var cors = require('cors')
 const app = express();
@@ -25,18 +24,26 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 app.get("/user/score", (req, res) => {
+    let person = require('./personAbility')
+    let personAbility = new person()
+    let val = personAbility[req.query.uid];
     ScoreModel.find({uid: req.query.uid}, function(err, post){
-        let val = personAbility[req.query.uid];
         let map = {};
         let arr = []
+        console.log(post);
         if (!post) {
             throw new Error("Error while fetching score...");
-            res.json({data: map, status: 200, error: 'error'})
+            res.json({data: [map], status: 200, error: 'error'})
         }
         let num = 0;
         let len = post.length;
         if (!len) {
-            res.json({data: map, status: 200})
+            for(let k in val) {
+                if (k !== 'name') {
+                    arr.push(val[k])
+                }
+            }
+            res.json({data: arr, status: 200})
         }
         post.map(function ({aid, goal}) {
 
@@ -44,7 +51,7 @@ app.get("/user/score", (req, res) => {
                 num += 1;
                 if (data) {
                     let {type, _id} = data;
-                    console.log(_id);
+                    // console.log(_id);
                     val[aid]['value'] += parseFloat(goal)
 
                 } else {
